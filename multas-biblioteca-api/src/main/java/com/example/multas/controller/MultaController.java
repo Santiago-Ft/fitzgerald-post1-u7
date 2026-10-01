@@ -51,4 +51,8 @@ public class MultaController {
             @NotBlank(message = "El concepto es obligatorio") String concepto,
             @Min(value = 1, message = "Los días de atraso deben ser al menos 1") int diasAtraso
     ) {}
+    @PostMapping("/{id}/pagar-en-linea")
+    public Multa pagarEnLinea(@PathVariable Long id) {
+       return multaService.pagarConPasarela(id);
+    }
 }

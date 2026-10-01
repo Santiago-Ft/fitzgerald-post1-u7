@@ -35,4 +35,9 @@ public class GlobalExceptionHandler {
                 .forEach(e -> errores.put(e.getField(), e.getDefaultMessage()));
         return errores;
     }
+    @ExceptionHandler(com.example.multas.domain.port.PagoRechazadoException.class)
+    @ResponseStatus(HttpStatus.PAYMENT_REQUIRED) // Retorna HTTP 402
+    public Map<String, String> handlePagoRechazado(com.example.multas.domain.port.PagoRechazadoException ex) {
+       return Map.of("error", ex.getMessage());
+    }
 }
